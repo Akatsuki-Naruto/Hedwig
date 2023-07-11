@@ -2,11 +2,18 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 import "./App.css";
-import SideNav from "./layout/toggleSidebav/Nav";
-import MyBooks from "./components/MyBooks/MyBooks";
-import CallApiBook from "./components/Api/ApiPopular";
+import SideNav from "./layout/Nav";
+import MyBooks from "./layout/MyBooks";
+import CallApiBook from "./Api/callApiBook";
+import clsx from "clsx";
+import { BookPlanIcon, CatalogIcon, DashboardIcon, HistoryIcon, IndexIcon, ProfileIcon, SavedIcon, SearchIcon, SettingIcon, ShoppingIcon } from "./assets/svg/svg";
 
 function App() {
+  const sidebav = clsx("focus:outline-none bg-primary-150 text-black w-14 h-14 border-none")
+  const button = clsx("flex justify-center w-15 h-8 flex-wrap content-center mr-2 bg-white border-solid border-[1px] border-black rounded-3xl hover:bg-primary-152 hober:border-[1px] hover:border-solid hover:border-black");
+  const genreA = clsx("text-sm text-black")
+  const genreButton = clsx("flex justify-center w-17 h-8 flex-wrap content-center ml-2 bg-white border-solid border-[1px] border-black rounded-3xl hover:bg-primary-152 hober:border-[1px] hover:border-solid hover:border-black");
+
   const [isActive2, setIsActive2] = useState(false);
   const [isShow, setisShow] = useState(false);
 
@@ -20,232 +27,37 @@ function App() {
 
   return (
     <>
-      <div className="Sidebav">
-        <div id="sidebav">
-          <button>
+      <div className="Sidebav fixed left-0 top-0 right-auto bottom-0 z-50 w-fit h-auto">
+        <div className={clsx("sidebav flex flex-col top-0 bottom-0 items-center bg-primary-150 absolute pr-[10px")}>
+          <button className={sidebav}>
             <a href="index.html">
-              <svg
-                fill="#000000"
-                height="30px"
-                width="30px"
-                version="1.1"
-                id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 512 512"
-                xml:space="preserve"
-              >
-                <g>
-                  <g>
-                    <path
-                      d="M428.033,162.858C422.975,72.232,347.87,0,256,0S89.025,72.232,83.967,162.858c-0.323,3.179-0.489,6.402-0.489,9.663
-			c0,15.543,0,320.162,0,322.783c0,9.22,7.475,16.696,16.696,16.696h111.304c119.87,0,217.043-97.174,217.043-217.043V172.522
-			C428.522,169.261,428.356,166.037,428.033,162.858z M256,33.391c42.163,0,79.93,18.923,105.464,48.641
-			c-8.722-2.662-17.967-4.119-27.551-4.119c-32.296,0-60.834,16.291-77.913,41.06c-17.079-24.77-45.617-41.06-77.913-41.06
-			c-9.584,0-18.829,1.457-27.551,4.119C176.07,52.314,213.837,33.391,256,33.391z M163.169,360.642
-			c-5.842-7.12-16.37-8.174-23.494-2.326c-6.988,5.731-14.635,10.267-22.804,13.595v-97.801
-			c26.505,36.201,66.686,61.636,112.937,68.728c-18.13,49.489-60.64,87.32-112.937,98.783v-34.418h-0.001
-			c16.082-4.569,30.884-12.325,43.979-23.061C167.978,378.293,169.017,367.772,163.169,360.642z M395.13,294.957
-			c0,101.261-82.386,183.652-183.652,183.652H116.87v-2.97c70.214-12.524,126.789-63.872,147.277-131.009
-			c53.767-2.53,101.081-29.682,130.984-70.521V294.957z M256,311.652c-76.718,0-139.13-62.413-139.13-139.13
-			c0-33.75,27.462-61.217,61.217-61.217s61.217,27.468,61.217,61.217c0,9.22,7.475,16.696,16.696,16.696s16.696-7.475,16.696-16.696
-			c0-33.75,27.462-61.217,61.217-61.217c33.755,0,61.217,27.468,61.217,61.217C395.13,249.239,332.718,311.652,256,311.652z"
-                    />
-                  </g>
-                </g>
-                <g>
-                  <g>
-                    <path
-                      d="M301.195,216.369c-3.26-3.26-7.532-4.891-11.804-4.891c-4.272,0-8.544,1.631-11.804,4.892L256,237.956l-21.587-21.588
-			c-6.521-6.521-17.087-6.521-23.609,0c-6.521,6.521-6.521,17.087,0,23.609l33.391,33.391c6.521,6.521,17.087,6.521,23.609,0
-			l33.391-33.391C307.716,233.456,307.716,222.89,301.195,216.369z"
-                    />
-                  </g>
-                </g>
-                <g>
-                  <g>
-                    <path
-                      d="M178.087,150.261c-12.277,0-22.261,9.99-22.261,22.261s9.984,22.261,22.261,22.261s22.261-9.99,22.261-22.261
-			S190.364,150.261,178.087,150.261z"
-                    />
-                  </g>
-                </g>
-                <g>
-                  <g>
-                    <path
-                      d="M333.913,150.261c-12.277,0-22.261,9.99-22.261,22.261s9.984,22.261,22.261,22.261c12.277,0,22.261-9.99,22.261-22.261
-			S346.19,150.261,333.913,150.261z"
-                    />
-                  </g>
-                </g>
-              </svg>
+              <IndexIcon/>
             </a>
           </button>
-          <button>
-            <svg
-              width="30px"
-              height="30px"
-              viewBox="0 -0.5 25 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M9.918 10.0005H7.082C6.66587 9.99708 6.26541 10.1591 5.96873 10.4509C5.67204 10.7427 5.50343 11.1404 5.5 11.5565V17.4455C5.5077 18.3117 6.21584 19.0078 7.082 19.0005H9.918C10.3341 19.004 10.7346 18.842 11.0313 18.5502C11.328 18.2584 11.4966 17.8607 11.5 17.4445V11.5565C11.4966 11.1404 11.328 10.7427 11.0313 10.4509C10.7346 10.1591 10.3341 9.99708 9.918 10.0005Z"
-                stroke="#000000"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M9.918 4.0006H7.082C6.23326 3.97706 5.52559 4.64492 5.5 5.4936V6.5076C5.52559 7.35629 6.23326 8.02415 7.082 8.0006H9.918C10.7667 8.02415 11.4744 7.35629 11.5 6.5076V5.4936C11.4744 4.64492 10.7667 3.97706 9.918 4.0006Z"
-                stroke="#000000"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M15.082 13.0007H17.917C18.3333 13.0044 18.734 12.8425 19.0309 12.5507C19.3278 12.2588 19.4966 11.861 19.5 11.4447V5.55666C19.4966 5.14054 19.328 4.74282 19.0313 4.45101C18.7346 4.1592 18.3341 3.9972 17.918 4.00066H15.082C14.6659 3.9972 14.2654 4.1592 13.9687 4.45101C13.672 4.74282 13.5034 5.14054 13.5 5.55666V11.4447C13.5034 11.8608 13.672 12.2585 13.9687 12.5503C14.2654 12.8421 14.6659 13.0041 15.082 13.0007Z"
-                stroke="#000000"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M15.082 19.0006H17.917C18.7661 19.0247 19.4744 18.3567 19.5 17.5076V16.4936C19.4744 15.6449 18.7667 14.9771 17.918 15.0006H15.082C14.2333 14.9771 13.5256 15.6449 13.5 16.4936V17.5066C13.525 18.3557 14.2329 19.0241 15.082 19.0006Z"
-                stroke="#000000"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+          <button className={sidebav}>
+            <DashboardIcon/>
           </button>
-          <button>
-            <svg
-              width="30px"
-              height="30px"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="none"
-                stroke="#000000"
-                stroke-width="2"
-                d="M5.5,18 C4.11928813,18 3,19.1192881 3,20.5 C3,21.8807119 4.11928813,23 5.5,23 L22,23 M3,20.5 L3,3.5 C3,2.11928813 4.11928813,1 5.5,1 L21,1 L21,18.0073514 L5.49217286,18.0073514 M20.5,18 C19.1192881,18 18,19.1192881 18,20.5 C18,21.8807119 19.1192881,23 20.5,23 L20.5,23"
-              />
-            </svg>
+          <button className={sidebav}>
+            <CatalogIcon/>
           </button>
-          <button>
-            <svg
-              fill="#000000"
-              width="30px"
-              height="30px"
-              viewBox="0 0 24 24"
-              id="Layer_1"
-              version="1.1"
-              xml:space="preserve"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <path d="M16.15,5.47l-4.06,6.49l-0.2-0.41c-0.25-0.49-0.85-0.69-1.34-0.45c-0.49,0.25-0.69,0.85-0.45,1.34l1,2  c0.16,0.32,0.49,0.53,0.85,0.55c0.02,0,0.03,0,0.05,0c0.34,0,0.67-0.18,0.85-0.47l5-8c0.29-0.47,0.15-1.08-0.32-1.38  C17.06,4.86,16.44,5,16.15,5.47z" />
-              <path d="M5.95,15.23l-0.93,5.61c-0.06,0.37,0.09,0.75,0.4,0.97c0.31,0.22,0.71,0.25,1.05,0.08L12,18.98l5.54,2.91  C17.68,21.96,17.84,22,18,22c0.21,0,0.41-0.06,0.59-0.19c0.31-0.22,0.46-0.6,0.4-0.97l-0.93-5.61l3.78-5.67  c0.2-0.31,0.22-0.7,0.05-1.03S21.37,8,21,8h-2c-0.55,0-1,0.45-1,1s0.45,1,1,1h0.13l-2.96,4.45c-0.14,0.21-0.2,0.47-0.15,0.72  l0.67,4.01l-4.22-2.21c-0.29-0.15-0.64-0.15-0.93,0l-4.22,2.21l0.67-4.01c0.04-0.25-0.01-0.51-0.15-0.72L4.87,10H9  c0.38,0,0.72-0.21,0.89-0.55l1.97-3.94l0.31,0.84c0.19,0.52,0.77,0.78,1.28,0.59c0.52-0.19,0.78-0.77,0.59-1.28l-1.11-3  C12.8,2.28,12.45,2.02,12.05,2c-0.41-0.02-0.77,0.2-0.95,0.55L8.38,8H3C2.63,8,2.29,8.2,2.12,8.53S1.96,9.25,2.17,9.55L5.95,15.23z" />
-            </svg>
+          <button className={sidebav}>
+            <SavedIcon/>
           </button>
-          <button>
-            <svg
-              width="30px"
-              height="30px"
-              viewBox="0 0 64 64"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_14_1955)">
-                <path
-                  d="M47.18 55.997V51.627C47.1803 49.7477 46.8103 47.8868 46.0913 46.1505C45.3722 44.4142 44.3181 42.8366 42.9893 41.5077C41.6604 40.1789 40.0828 39.1248 38.3465 38.4058C36.6102 37.6867 34.7493 37.3167 32.87 37.317H31.13C29.2507 37.3167 27.3898 37.6867 25.6535 38.4058C23.9172 39.1248 22.3396 40.1789 21.0107 41.5077C19.6819 42.8366 18.6278 44.4142 17.9087 46.1505C17.1897 47.8868 16.8197 49.7477 16.82 51.627V55.997"
-                  stroke="#426AB2"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M32.003 37.317C37.1624 37.317 41.345 33.1344 41.345 27.975C41.345 22.8156 37.1624 18.633 32.003 18.633C26.8436 18.633 22.661 22.8156 22.661 27.975C22.661 33.1344 26.8436 37.317 32.003 37.317Z"
-                  stroke="#426AB2"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M52.003 7.99699H12.003C10.9421 7.99699 9.92472 8.41842 9.17457 9.16857C8.42443 9.91871 8.003 10.9361 8.003 11.997V51.997C8.003 53.0579 8.42443 54.0753 9.17457 54.8254C9.92472 55.5756 10.9421 55.997 12.003 55.997H52.003C53.0639 55.997 54.0813 55.5756 54.8314 54.8254C55.5816 54.0753 56.003 53.0579 56.003 51.997V11.997C56.003 10.9361 55.5816 9.91871 54.8314 9.16857C54.0813 8.41842 53.0639 7.99699 52.003 7.99699V7.99699Z"
-                  stroke="#000000"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_14_1955">
-                  <rect
-                    width="52"
-                    height="52"
-                    fill="white"
-                    transform="translate(6 6)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
+          <button className={sidebav}>
+            <ProfileIcon/>
           </button>
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30px"
-              height="30px"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 2c-1.716 0-3.408.106-5.07.31C3.806 2.45 3 3.414 3 4.517V17.25a.75.75 0 001.075.676L10 15.082l5.925 2.844A.75.75 0 0017 17.25V4.517c0-1.103-.806-2.068-1.93-2.207A41.403 41.403 0 0010 2z"
-                clip-rule="evenodd"
-              />
-            </svg>
+          <button className={sidebav}>
+            <BookPlanIcon/>
           </button>
-          <button>
-            <svg
-              fill="#000000"
-              width="30px"
-              height="30px"
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M16,17a1,1,0,0,0,1-1V6.45a1,1,0,1,0-2,0V15H11.91a1,1,0,0,0,0,2Z" />
-              <path d="M16,0A16.06,16.06,0,0,0,2,8.27V6.45a1,1,0,0,0-2,0v5.46a1,1,0,0,0,1,1H6.45a1,1,0,0,0,0-2H3A14,14,0,1,1,2,16a1,1,0,0,0-2,0A16,16,0,1,0,16,0Z" />
-            </svg>
+          <button className={sidebav}>
+            <HistoryIcon/>
           </button>
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30px"
-              height="30px"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.34 1.804A1 1 0 019.32 1h1.36a1 1 0 01.98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 011.262.125l.962.962a1 1 0 01.125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 01.804.98v1.361a1 1 0 01-.804.98l-1.473.295a6.95 6.95 0 01-.587 1.416l.834 1.25a1 1 0 01-.125 1.262l-.962.962a1 1 0 01-1.262.125l-1.25-.834a6.953 6.953 0 01-1.416.587l-.294 1.473a1 1 0 01-.98.804H9.32a1 1 0 01-.98-.804l-.295-1.473a6.957 6.957 0 01-1.416-.587l-1.25.834a1 1 0 01-1.262-.125l-.962-.962a1 1 0 01-.125-1.262l.834-1.25a6.957 6.957 0 01-.587-1.416l-1.473-.294A1 1 0 011 10.68V9.32a1 1 0 01.804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 01.125-1.262l.962-.962A1 1 0 015.38 3.03l1.25.834a6.957 6.957 0 011.416-.587l.294-1.473zM13 10a3 3 0 11-6 0 3 3 0 016 0z"
-                clip-rule="evenodd"
-              />
-            </svg>
+          <button className={sidebav}>
+            <SettingIcon/>
           </button>
 
           <button
-            className={`openBtn ${isActive2 ? "change" : "container"}`}
+            className={`${sidebav} ${isActive2 ? "change" : "container"}`}
             onClick={handleClick2}
           >
             <div className="bar1"></div>
@@ -253,82 +65,51 @@ function App() {
             <div className="bar3"></div>
           </button>
         </div>
-        <div id="Tabbav">
+        <div className={clsx("Tabbav fixed top-0 left-14 bottom-0")}>
           <SideNav trigger={isShow} setTrigger={setisShow} />
         </div>
       </div>
-      <div className="Index">
-        <div id="Header">
-          <div id="header">
-            <div className="genre">
-              <button>
-                <a href="#">Journey</a>
+      <div className={clsx("Index ml-12 w-full h-auto")}>
+        <div className={clsx("Header fixed top-0 left-14 w-11/12 mr-2 py-2 bg-white")}>
+          <div className={clsx("header flex justify-between")}>
+            <div className={clsx("genre flex justify-center items-center flex-row")}>
+              <button className={genreButton }>
+                <a className={genreA} href="#">Journey</a>
               </button>
-              <button>
-                <a href="#">Biography</a>
+              <button className={genreButton }>
+                <a className={genreA} href="#">Biography</a>
               </button>
-              <button>
-                <a href="#">Business</a>
+              <button className={genreButton}>
+                <a className={genreA} href="#">Business</a>
               </button>
-              <button>
-                <a href="#">Romance</a>
+              <button className={genreButton}>
+                <a className={genreA} href="#">Romance</a>
               </button>
             </div>
-            <div className="profile">
-              <div className="search">
+            <div className={clsx("profile text-right flex items-center flex-row")}>
+              <div className={clsx("search flex")}>
                 <input
-                  className="searchText"
+                  className={clsx("rounded-2xl bg-primary-151 text-black mr-3 border-solid border-[1px] border-black pl-2")}
                   type="Text"
                   placeholder=" Search"
                 />
-                <button>
-                  <svg
-                    width="30px"
-                    height="30px"
-                    viewBox="0 -0.5 25 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M7.30524 15.7137C6.4404 14.8306 5.85381 13.7131 5.61824 12.4997C5.38072 11.2829 5.50269 10.0233 5.96924 8.87469C6.43181 7.73253 7.22153 6.75251 8.23924 6.05769C10.3041 4.64744 13.0224 4.64744 15.0872 6.05769C16.105 6.75251 16.8947 7.73253 17.3572 8.87469C17.8238 10.0233 17.9458 11.2829 17.7082 12.4997C17.4727 13.7131 16.8861 14.8306 16.0212 15.7137C14.8759 16.889 13.3044 17.5519 11.6632 17.5519C10.0221 17.5519 8.45059 16.889 7.30524 15.7137V15.7137Z"
-                      stroke="#000000"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M11.6702 7.20292C11.2583 7.24656 10.9598 7.61586 11.0034 8.02777C11.0471 8.43968 11.4164 8.73821 11.8283 8.69457L11.6702 7.20292ZM13.5216 9.69213C13.6831 10.0736 14.1232 10.2519 14.5047 10.0904C14.8861 9.92892 15.0644 9.4888 14.9029 9.10736L13.5216 9.69213ZM16.6421 15.0869C16.349 14.7943 15.8741 14.7947 15.5815 15.0879C15.2888 15.381 15.2893 15.8559 15.5824 16.1485L16.6421 15.0869ZM18.9704 19.5305C19.2636 19.8232 19.7384 19.8228 20.0311 19.5296C20.3237 19.2364 20.3233 18.7616 20.0301 18.4689L18.9704 19.5305ZM11.8283 8.69457C12.5508 8.61801 13.2384 9.02306 13.5216 9.69213L14.9029 9.10736C14.3622 7.83005 13.0496 7.05676 11.6702 7.20292L11.8283 8.69457ZM15.5824 16.1485L18.9704 19.5305L20.0301 18.4689L16.6421 15.0869L15.5824 16.1485Z"
-                      fill="#000000"
-                    />
-                  </svg>
+                <button className={button}>
+                  <SearchIcon/>
                 </button>
               </div>
-              <button type="button"></button>
-              <button>
-                <svg
-                  width="30px"
-                  height="30px"
-                  viewBox="0 -0.5 25 25"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.24542 8.91722C5.1997 8.50553 4.8289 8.20886 4.41722 8.25458C4.00553 8.3003 3.70886 8.6711 3.75458 9.08278L5.24542 8.91722ZM5.413 17.221L4.66758 17.3038L4.66759 17.3039L5.413 17.221ZM7.4 19L7.39972 19.75H7.4V19ZM17.6 19L17.6001 18.25H17.6V19ZM19.588 17.221L20.3334 17.3039L20.3334 17.3037L19.588 17.221ZM21.2454 9.08269C21.2911 8.67101 20.9944 8.30024 20.5827 8.25457C20.171 8.2089 19.8002 8.50562 19.7546 8.91731L21.2454 9.08269ZM2.5 8.25C2.08579 8.25 1.75 8.58579 1.75 9C1.75 9.41421 2.08579 9.75 2.5 9.75V8.25ZM22.5 9.75C22.9142 9.75 23.25 9.41421 23.25 9C23.25 8.58579 22.9142 8.25 22.5 8.25V9.75ZM4.82918 8.66459C4.64394 9.03507 4.79411 9.48558 5.16459 9.67082C5.53507 9.85606 5.98558 9.70589 6.17082 9.33541L4.82918 8.66459ZM8.17082 5.33541C8.35606 4.96493 8.20589 4.51442 7.83541 4.32918C7.46493 4.14394 7.01442 4.29411 6.82918 4.66459L8.17082 5.33541ZM18.8292 9.33541C19.0144 9.70589 19.4649 9.85606 19.8354 9.67082C20.2059 9.48558 20.3561 9.03507 20.1708 8.66459L18.8292 9.33541ZM18.1708 4.66459C17.9856 4.29411 17.5351 4.14394 17.1646 4.32918C16.7941 4.51442 16.6439 4.96493 16.8292 5.33541L18.1708 4.66459ZM8.75 15C8.75 15.4142 9.08579 15.75 9.5 15.75C9.91421 15.75 10.25 15.4142 10.25 15H8.75ZM10.25 13C10.25 12.5858 9.91421 12.25 9.5 12.25C9.08579 12.25 8.75 12.5858 8.75 13H10.25ZM11.75 15C11.75 15.4142 12.0858 15.75 12.5 15.75C12.9142 15.75 13.25 15.4142 13.25 15H11.75ZM13.25 13C13.25 12.5858 12.9142 12.25 12.5 12.25C12.0858 12.25 11.75 12.5858 11.75 13H13.25ZM14.75 15C14.75 15.4142 15.0858 15.75 15.5 15.75C15.9142 15.75 16.25 15.4142 16.25 15H14.75ZM16.25 13C16.25 12.5858 15.9142 12.25 15.5 12.25C15.0858 12.25 14.75 12.5858 14.75 13H16.25ZM3.75458 9.08278L4.66758 17.3038L6.15842 17.1382L5.24542 8.91722L3.75458 9.08278ZM4.66759 17.3039C4.82238 18.6961 5.99892 19.7495 7.39972 19.75L7.40028 18.25C6.76356 18.2498 6.22877 17.771 6.15841 17.1381L4.66759 17.3039ZM7.4 19.75H17.6V18.25H7.4V19.75ZM17.5999 19.75C19.0012 19.7502 20.1786 18.6966 20.3334 17.3039L18.8426 17.1381C18.7722 17.7712 18.2371 18.2501 17.6001 18.25L17.5999 19.75ZM20.3334 17.3037L21.2454 9.08269L19.7546 8.91731L18.8426 17.1383L20.3334 17.3037ZM2.5 9.75H22.5V8.25H2.5V9.75ZM6.17082 9.33541L8.17082 5.33541L6.82918 4.66459L4.82918 8.66459L6.17082 9.33541ZM20.1708 8.66459L18.1708 4.66459L16.8292 5.33541L18.8292 9.33541L20.1708 8.66459ZM10.25 15V13H8.75V15H10.25ZM13.25 15V13H11.75V15H13.25ZM16.25 15V13H14.75V15H16.25Z"
-                    fill="#000000"
-                  />
-                </svg>
+              <button  className={clsx("flex justify-center h-8 flex-wrap content-center mr-2 bg-white border-solid border-[1px] border-black rounded-full hover:bg-primary-152 hober:border-[1px] hover:border-solid hover:border-black")}></button>
+              <button  className={button}>
+                <ShoppingIcon/>
               </button>
             </div>
           </div>
         </div>
-        <div id="Main">
-          <div id="main">
-            <div className="preference">
+        <div className={clsx("flex mt-6 w-11/12 mr-0")}>
+          <div>
+            <div>
               <MyBooks />
             </div>
-            <div className="popularWeek">
+            <div>
               <CallApiBook />
             </div>
           </div>

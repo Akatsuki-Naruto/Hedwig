@@ -5,7 +5,32 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary:{
+          150: '#faebd7',
+          151: '#feffdc',
+          152: '#d9d9d9',
+          153: '#f0f8ff'
+        },
+        secondary: {
+          
+        },
+        padding:{
+          '13px': '13px',
+          '10px':'10px'
+        },
+        borderWidth:{
+          '1px': '1px'
+        },
+        zIndex:{
+          '25':'25'
+        },
+        width:{
+          '28%':'28%'
+        }
+      }
+    },
   },
   plugins: [],
 }

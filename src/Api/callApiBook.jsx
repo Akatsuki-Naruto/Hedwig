@@ -6,13 +6,19 @@ import ApiInfor from "./ApiInfor";
 import clsx from "clsx";
 
 import { client } from "./api";
+import ApiMyBook from "./ApiMyBook";
 
 function CallApiBook() {
   const [Books, setBooks] = useState([]);
+  const [MyBooks, setMyBooks] = useState([]);
   const [Authors, setAuthors] = useState([]);
   const [inforBooks, setInforBooks] = useState([]);
 
   // Functions
+  const fetchMyBooks = async () => {
+    const response = await client.get("MyBooks/?_limit=4");
+    setMyBooks(response.data);
+  };
 
   const fetchAuthors = async () => {
     const response = await client.get("Authors/?_limit=8");
@@ -27,6 +33,7 @@ function CallApiBook() {
   useEffect(() => {
     fetchAuthors();
     fetchBooks();
+    fetchMyBooks();
   }, []);
 
   const getBooks = async (id) => {
@@ -34,9 +41,30 @@ function CallApiBook() {
     setInforBooks(Books.filter((Book) => Book.id === id));
   };
 
+  const getMyBooks = async (id) => {
+    const response = await client.get(`MyBooks/?_limit=1&id=${id}`);
+    setMyBooks(MyBooks.filter((MyBook) => MyBook.id === id));
+  };
+
   return (
     <div className={clsx("grid grid-cols-1")}>
-      <div className={clsx(" z-30")}>
+      <div className={clsx(" z-20")}>
+        <ul
+          className={clsx(
+            "gap-x-7 gap-y-4 grid grid-cols-4 grid-rows-1 text-center mb-7 justify-center"
+          )}
+        >
+          {MyBooks.map((MyBook) => {
+            <ApiMyBook
+              key={MyBook.id}
+              id={MyBook.id}
+              image={MyBook.image}
+              name={MyBook.name}
+              author={MyBook.author}
+              getMyBooks={getMyBooks}
+            />;
+          })}
+        </ul>
         <ul
           className={clsx(
             "gap-x-7 gap-y-4 grid grid-cols-4 grid-rows-2 text-center mb-7 justify-center"

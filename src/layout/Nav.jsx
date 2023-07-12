@@ -8,7 +8,7 @@ const SideNav = (props) => {
 
   return props.trigger ? (
     <>
-      <div className={clsx("bg-primary-150 h-full pr-6")}>
+      <div className={clsx("bg-primary-155 h-full pr-6")}>
         <div className={clsx("focus:outline-none flex flex-col text-black border-none rounded-xl items-stretch bg-white w-32 ...")}>
           <div className={textTabBav}>Hedwig</div>
           <div className={textTabBav}>Dashboard</div>

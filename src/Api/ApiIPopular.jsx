@@ -5,8 +5,8 @@ export default function ApiIndexBook(Book) {
   return (
     <>
       <button className={clsx("flex bg-white p-0 w-52 text-black" )}onClick={() => Book.getBooks(Book.id)}>
-        <div className={clsx("imgBook flex w-12 h-20 pr-2")}>
-          <img className={clsx("rounded-lg")} src={Book.image} alt="" />
+        <div className={clsx("pr-2")}>
+          <img className={clsx("rounded-lg flex w-12 h-20")} src={Book.image} alt="" />
         </div>
         <div className={clsx(" w-3/5")}>
           <div className={clsx(" font-bold text-sm")}>{Book.name}</div>

@@ -267,7 +267,7 @@ export const MenuIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="24" height="24" fill="#faebd7" />
+    <rect width="24" height="24" fill="#F4F4F4" />
     <path
       d="M6 12H18"
       stroke="#000000"
@@ -336,14 +336,14 @@ export const ExitIcon = () => (
 export const PlayIcon = () => {
   <svg
     fill="#000000"
-    height="60px"
-    width="60px"
+    height="40px"
+    width="40px"
     version="1.1"
     id="Capa_1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 490 490"
-    xml:space="preserve"
+    xmlSpace="preserve"
   >
     <g>
       <path
@@ -352,5 +352,40 @@ export const PlayIcon = () => {
       />
       <path d="M165.536,121.438v238.794l223.302-119.39L165.536,121.438z M196.161,172.55l127.719,68.293l-127.719,68.278V172.55z" />
     </g>
+  </svg>;
+};
+
+export const RightIcon = () => {
+  <svg
+    fill="#000000"
+    xmlns="http://www.w3.org/2000/svg"
+    width="30px"
+    height="30px"
+    viewBox="0 0 100 100"
+    enableBackground="new 0 0 100 100"
+    xmlSpace="preserve"
+  >
+    <path
+      d="M20.8,53.8h41.5c1.1,0,1.6,1.4,0.9,2.1l-12,12c-0.8,0.8-0.8,1.9,0,2.6l2.8,2.8c0.8,0.8,1.9,0.8,2.6,0
+	l21.9-22c0.8-0.8,0.8-1.9,0-2.6L56.5,26.7c-0.8-0.8-1.9-0.8-2.6,0l-2.6,2.6c-0.8,0.8-0.8,1.9,0,2.6l12,12c0.8,0.9,0.3,2.3-0.9,2.3
+	H20.9c-1,0-1.9,0.8-1.9,1.8v3.8C19,52.8,19.8,53.8,20.8,53.8z"
+    />
+  </svg>;
+};
+
+export const LeftIcon = () => {
+  <svg
+    width="30px"
+    height="30px"
+    viewBox="0 0 24 24"
+    fill="#000000"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M6.3508 12.7499L11.2096 17.4615L10.1654 18.5383L3.42264 11.9999L10.1654 5.46148L11.2096 6.53833L6.3508 11.2499L21 11.2499L21 12.7499L6.3508 12.7499Z"
+      fill="#080341"
+    />
   </svg>;
 };

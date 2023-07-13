@@ -37,7 +37,6 @@ function App() {
 
   const [isActive2, setIsActive2] = useState(true);
   const [isShow, setisShow] = useState(false);
-  const [setting, setSetting] = useState(false);
 
   // Function
 
@@ -47,10 +46,6 @@ function App() {
     };
     setIsActive2((current1) => !current1);
     handleSHow();
-  };
-
-  const handleClick = () => {
-    setSetting(!setting);
   };
 
   return (
@@ -84,7 +79,7 @@ function App() {
           <button className={sidebav}>
             <HistoryIcon />
           </button>
-          <button className={sidebav} onClick={handleClick}>
+          <button className={sidebav}>
             <SettingIcon />
           </button>
 
@@ -156,11 +151,7 @@ function App() {
           </div>
         </div>
         <div className={clsx("Main flex mt-6 w-11/12 mr-0")}>
-          <div>
-            <div>
-              <CallApiBook />
-            </div>
-          </div>
+          <CallApiBook />
         </div>
       </div>
     </>

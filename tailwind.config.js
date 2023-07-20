@@ -29,6 +29,11 @@ export default {
         width: {
           "28%": "28%",
         },
+        screens: {
+          md: "768px",
+          "m-md": { max: "768px" },
+          "l-md": { max: "1050px" },
+        },
       },
     },
   },

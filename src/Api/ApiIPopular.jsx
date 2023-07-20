@@ -4,7 +4,7 @@ import { FlexboxGrid } from "rsuite";
 export default function ApiIndexBook(Book) {
   return (
     <>
-      <button className={clsx("flex bg-white p-0 w-52 text-black" )}onClick={() => Book.getBooks(Book.id)}>
+      <button className={clsx("flex bg-white p-0 w-52 text-black" )}onClick={() => Book.getBooks(Book.id)} onScroll={()=>Book.getBook(Book)}>
         <div className={clsx("pr-2")}>
           <img className={clsx("rounded-lg flex w-12 h-20")} src={Book.image} alt="" />
         </div>

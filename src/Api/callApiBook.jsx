@@ -9,9 +9,10 @@ import { apiAuthor, apiBooks, apiMyBooks } from "./api";
 import ApiMyBook from "./ApiMyBook";
 
 function CallApiBook() {
+  let limit = 12;
   const [Books, setBooks] = useState([]);
   const [MyBooks, setMyBooks] = useState([]);
-  const [Authors, setAuthors] = useState([]);;
+  const [Authors, setAuthors] = useState([]);
   const [inforBooks, setInforBooks] = useState([]);
 
   // Functions
@@ -26,15 +27,47 @@ function CallApiBook() {
   };
 
   const fetchBooks = async () => {
-    const response = await apiBooks.get("Books/?_limit=12");
+    const response = await apiBooks.get(`Books/?_limit=${limit}`);
     setBooks(response.data);
   };
+
+  handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop !==
+      document.documentElement.offsetHeight
+    )
+      return;
+    setIsFetching(true);
+  }
+
+  const getMorePosts=()=> {
+    setTimeout(() => {
+      setBooks(page++)
+      getBooks();
+    }, 2000);
+  }
 
   useEffect(() => {
     fetchMyBooks();
     fetchAuthors();
     fetchBooks();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(
+    () => {
+      getPosts();
+    },
+    []
+  );
+  useEffect(() => {
+    if (!isFetching) return;
+    getMorePosts();
+  }, [isFetching]);
 
   const getBooks = async (id) => {
     const response = await apiBooks.get(`Books/?_limit=1&id=${id}`);
@@ -45,6 +78,11 @@ function CallApiBook() {
     const response = await apiMyBooks.get(`MyBooks/?_limit=1&id=${id}`);
     setInforBooks(Books.filter((Book) => Book.id === id));
   };
+
+  // const getBook = async (id) => {
+  //   const response = await apiBooks.get(`Books/?_limit=4`)
+  //   setInforBooks(Books.filter((Book) => Book.id === id));
+  // }
 
   return (
     <div className={clsx("grid grid-cols-1")}>
@@ -90,6 +128,7 @@ function CallApiBook() {
               price={Book.price}
               image={Book.image}
               getBooks={getBooks}
+              // getBook={getBook}
             />
           ))}
         </ul>

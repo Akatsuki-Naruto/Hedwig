@@ -3,17 +3,22 @@ import { PlayIcon } from "../assets/svg/svg";
 import clsx from "clsx";
 
 export default function ApiMyBook(MyBook) {
-  
   return (
     <>
-      <div className={clsx("text-black grid grid-flow-col")}>
+      <div className={clsx("text-black grid grid-flow-col")} >
         <div className={clsx("flex pr-4")}>
           <img className={clsx("flex w-24 h-40")} src={MyBook.image} alt="" />
         </div>
         <div className={clsx("grid grid-flow-row grid-rows-2 items-center ")}>
           <div className={clsx("flex flex-col")}>
             <div className={clsx(" font-bold text-lg")}>{MyBook.name}</div>
-            <div  className={clsx("authorBook text-sm font-regular italic text-gray-600")}>{MyBook.author}</div>
+            <div
+              className={clsx(
+                "authorBook text-sm font-regular italic text-gray-600"
+              )}
+            >
+              {MyBook.author}
+            </div>
           </div>
 
           <button
@@ -30,6 +35,7 @@ export default function ApiMyBook(MyBook) {
           </button>
         </div>
       </div>
+
     </>
   );
 }

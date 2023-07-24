@@ -31,21 +31,21 @@ function CallApiBook() {
     setBooks(response.data);
   };
 
-  handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight
-    )
-      return;
-    setIsFetching(true);
-  }
+  // handleScroll = () => {
+  //   if (
+  //     window.innerHeight + document.documentElement.scrollTop !==
+  //     document.documentElement.offsetHeight
+  //   )
+  //     return;
+  //   setIsFetching(true);
+  // }
 
-  const getMorePosts=()=> {
-    setTimeout(() => {
-      setBooks(page++)
-      getBooks();
-    }, 2000);
-  }
+  // const getMorePosts=()=> {
+  //   setTimeout(() => {
+  //     setBooks(page++)
+  //     getBooks();
+  //   }, 2000);
+  // }
 
   useEffect(() => {
     fetchMyBooks();
@@ -53,21 +53,21 @@ function CallApiBook() {
     fetchBooks();
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
-  useEffect(
-    () => {
-      getPosts();
-    },
-    []
-  );
-  useEffect(() => {
-    if (!isFetching) return;
-    getMorePosts();
-  }, [isFetching]);
+  // useEffect(
+  //   () => {
+  //     getPosts();
+  //   },
+  //   []
+  // );
+  // useEffect(() => {
+  //   if (!isFetching) return;
+  //   getMorePosts();
+  // }, [isFetching]);
 
   const getBooks = async (id) => {
     const response = await apiBooks.get(`Books/?_limit=1&id=${id}`);

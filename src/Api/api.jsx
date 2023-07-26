@@ -11,6 +11,9 @@ export const apiMyBooks = axios.create({
 });
 
 export const apiBooks = axios.create({
-  baseURL:
-    "https://my-json-server.typicode.com/Akatsuki-Naruto/dbHedwig",
+  baseURL: "https://my-json-server.typicode.com/Akatsuki-Naruto/dbHedwig",
+});
+
+export const users = axios.create({
+  baseURL: "https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User",
 });

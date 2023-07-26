@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./App.css";
 import SideNav from "./layout/Nav";
 import CallApiBook from "./Api/callApiBook";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import {
   BookPlanIcon,
@@ -19,6 +20,10 @@ import {
   SettingIcon,
   ShoppingIcon,
 } from "./assets/svg/svg";
+import Login from "./layout/Login/Login";
+import { Container, Nav, Navbar } from "rsuite";
+import NavDropdown from "rsuite/esm/Nav/NavDropdown";
+import NavDropdownItem from "rsuite/esm/Nav/NavDropdownItem";
 
 function App() {
   // Khai bao clsx
@@ -37,6 +42,7 @@ function App() {
 
   const [isActive2, setIsActive2] = useState(true);
   const [isShow, setisShow] = useState(false);
+  const navigate = useNavigate();
 
   // Function
 
@@ -48,6 +54,12 @@ function App() {
     handleSHow();
   };
 
+  const handleRemove = () => {
+    if (localStorage.getItem("user-info")) {
+      navigate("/index.html");
+    }
+  }
+
   return (
     <>
       <div className="Sidebav fixed left-0 top-0 right-auto bottom-0 z-50 w-fit h-auto">
@@ -57,7 +69,7 @@ function App() {
           )}
         >
           <button className={sidebav}>
-            <a href="index.html">
+            <a href="/index.html">
               <IndexIcon />
             </a>
           </button>
@@ -139,17 +151,23 @@ function App() {
                   <SearchIcon />
                 </button>
               </div>
-              <button
+
+              <Link
+                to={"/Login"}
                 className={clsx(
-                  "flex justify-center h-8 flex-wrap content-center mr-2 bg-white border-solid border-[1px] border-black rounded-full hover:bg-primary-152 hober:border-[1px] hover:border-solid hover:border-black"
+                  "flex justify-center w-8 h-8 flex-wrap content-center mr-2 bg-white border-solid border-[1px] border-black rounded-full hover:bg-primary-152 hober:border-[1px] hover:border-solid hover:border-black"
                 )}
-              ></button>
+                onClick={handleRemove}
+              ><a href="#"/></Link>
               <button className={button}>
                 <ShoppingIcon />
               </button>
             </div>
           </div>
         </div>
+        <Routes>
+          <Route path="/Login/*" element={<Login />} />
+        </Routes>
         <div className={clsx("Main flex mt-6 w-11/12 mr-0")}>
           <CallApiBook />
         </div>

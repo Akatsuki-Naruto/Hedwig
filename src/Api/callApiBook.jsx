@@ -7,6 +7,7 @@ import clsx from "clsx";
 
 import { apiAuthor, apiBooks, apiMyBooks } from "./api";
 import ApiMyBook from "./ApiMyBook";
+import InfiniteScroll from "../layout/InfiniteList";
 
 function CallApiBook() {
   let limit = 12;
@@ -14,6 +15,30 @@ function CallApiBook() {
   const [MyBooks, setMyBooks] = useState([]);
   const [Authors, setAuthors] = useState([]);
   const [inforBooks, setInforBooks] = useState([]);
+
+
+
+const [page, setPage] = useState(1);
+const [totalRows, setTotalRows] = useState(0);
+const [posts, setPosts] = useState([]);
+
+useEffect(() => {
+  (async () => {
+    const response = await (
+      await fetch(
+        `https://my-json-server.typicode.com/Akatsuki-Naruto/dbHedwig/Books?_page=${page}&_limit=2`
+      )
+    ).json();
+    setPosts([...posts, ...response.data]);
+    setTotalRows(response.pagination._totalRows);
+  })();
+}, [page]);
+
+
+
+
+
+
 
   // Functions
   const fetchMyBooks = async () => {
@@ -79,14 +104,21 @@ function CallApiBook() {
     setInforBooks(Books.filter((Book) => Book.id === id));
   };
 
-  // const getBook = async (id) => {
-  //   const response = await apiBooks.get(`Books/?_limit=4`)
-  //   setInforBooks(Books.filter((Book) => Book.id === id));
-  // }
+  const getBook = async (limit) => {
+    const response = await apiBooks.get(`Books/?_limit=${limit}`);
+    setBooks(response.data);
+  };
 
   return (
     <div className={clsx("grid grid-cols-1")}>
       <div className={clsx(" z-20")}>
+        <div
+          className={clsx(
+            " text-primary-156 flex text-left text-2xl pl-3 my-2 font-bold italic"
+          )}
+        >
+          My Books
+        </div>
         <ul
           className={clsx(
             "gap-x-7 gap-y-4 grid grid-cols-4 grid-rows-1 text-center mb-7 justify-center"
@@ -99,11 +131,17 @@ function CallApiBook() {
               image={MyBook.image}
               name={MyBook.name}
               author={MyBook.author}
-              button={MyBook.button}
               getMyBooks={getMyBooks}
             />
           ))}
         </ul>
+        <div
+          className={clsx(
+            " text-primary-156 flex text-left text-2xl pl-3 my-2 font-bold italic"
+          )}
+        >
+          Popular Author
+        </div>
         <ul
           className={clsx(
             "gap-x-7 gap-y-4 grid grid-cols-4 grid-rows-2 text-center mb-7 justify-center"
@@ -113,11 +151,18 @@ function CallApiBook() {
             <ApiIndex key={Author.id} id={Author.id} author={Author.author} />
           ))}
         </ul>
-
+        <div
+          className={clsx(
+            " text-primary-156 flex text-left text-2xl pl-3 my-2 font-bold italic"
+          )}
+        >
+          Popular Books
+        </div>
         <ul
           className={clsx(
             "PopularBook text-black flex gap-x-7 gap-y-4 flex-wrap text-center mb-8 justify-center"
           )}
+          onScroll={() => getBook((limit += 1))}
         >
           {Books.map((Book) => (
             <ApiIndexBook
@@ -128,7 +173,7 @@ function CallApiBook() {
               price={Book.price}
               image={Book.image}
               getBooks={getBooks}
-              // getBook={getBook}
+              getBook={getBook}
             />
           ))}
         </ul>
@@ -147,6 +192,30 @@ function CallApiBook() {
             left={Book.left}
           />
         ))}
+      </div>
+      <div>
+        <InfiniteScroll
+          loader={<p>loading...</p>}
+          className="w-[800px] mx-auto my-10"
+          fetchMore={() => setPage((prev) => prev + 1)}
+          hasMore={posts.length < totalRows}
+          endMessage={<p className={clsx("text-black")}>You have seen it all</p>}
+        >
+          {Books.map((post, index) => (
+            <div
+              className="rounded-xl shadow-md bg-black mb-8 flex items-center p-5"
+              key={index}
+            >
+              <img src={post.image} className=" rounded-md w-12 h-20" />
+              <div className="ml-5">
+                <h3 className="font-medium">{post.name}</h3>
+                <h3 className="font-medium">{post.author}</h3>
+                <h1 className="font-bold text-xl">{post.title}</h1>
+                <p>{post.description}</p>
+              </div>
+            </div>
+          ))}
+        </InfiniteScroll>
       </div>
     </div>
   );

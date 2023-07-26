@@ -20,7 +20,6 @@ function CallApiBook() {
 
 const [page, setPage] = useState(1);
 const [totalRows, setTotalRows] = useState(0);
-const [posts, setPosts] = useState([]);
 
 useEffect(() => {
   (async () => {
@@ -29,7 +28,7 @@ useEffect(() => {
         `https://my-json-server.typicode.com/Akatsuki-Naruto/dbHedwig/Books?_page=${page}&_limit=2`
       )
     ).json();
-    setPosts([...posts, ...response.data]);
+    setBooks([...Books, ...response.data]);
     setTotalRows(response.pagination._totalRows);
   })();
 }, [page]);
@@ -198,7 +197,7 @@ useEffect(() => {
           loader={<p>loading...</p>}
           className="w-[800px] mx-auto my-10"
           fetchMore={() => setPage((prev) => prev + 1)}
-          hasMore={posts.length < totalRows}
+          hasMore={Books.length < totalRows}
           endMessage={<p className={clsx("text-black")}>You have seen it all</p>}
         >
           {Books.map((post, index) => (

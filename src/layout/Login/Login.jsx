@@ -2,13 +2,15 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
-import { loginApi } from "../../component/user/userService";
+// import { loginApi } from "../../component/user/userService";
 import { toast } from "react-toastify";
+import { users } from "../../Api/api";
 
 function Login() {
   // const userRef = userRef();
   // const errRef = userRef();
 
+  const [users, setUsers] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
@@ -35,20 +37,38 @@ function Login() {
   // };
 
 
+  // useEffect(() => {
+  //   if (localStorage.getItem("user-info")) {
+  //     navigate("/index.html");
+  //   }
+  //   console.log("1");
+  // }, []);
 
-
-
-  useEffect(() => {
-    if (localStorage.getItem("user-info")) {
-      navigate("/index.html");
-    }
-    console.log("1");
-  }, []);
-
-
-
-
-
+  function signIn(email, password) {
+    var userObj = {email: email, password: password};
+    var jsonBody = JSON.stringify(userObj);
+    
+    fetch("https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User", {
+        // mode: "no-cors",
+        method: 'POST',
+        headers: {
+            "Accept-language": "RU",
+            "Content-Type": "application/json"
+        },
+        body: jsonBody
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert("Error Password or Username");
+        } else {
+            return data;
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
 
   // useEffect(() => {
   //   userRef.current.focus();
@@ -66,7 +86,10 @@ function Login() {
   //   setSuccess(true);
   // }
 
-
+  const postUser = async (id) => {
+    const response = await users.post(`/id=${id}`);
+    setUsers(users.filter((user)=> user.id === id))
+  }
 
 
   async function login(){
@@ -87,7 +110,7 @@ function Login() {
 
     result = await result.json();
     localStorage.setItem("user-info", JSON.stringify(result));
-    navigate("/index.html")
+    navigate("/")
     console.log("3");
   }
 
@@ -141,7 +164,7 @@ function Login() {
               <button
                 className={email && password ? active : disabled}
                 disabled={email && password ? false : true}
-                onClick={login}
+                onClick={signIn}
               >
                 Login
               </button>

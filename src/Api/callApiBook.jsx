@@ -25,7 +25,7 @@ useEffect(() => {
   (async () => {
     const response = await (
       await fetch(
-        `https://my-json-server.typicode.com/Akatsuki-Naruto/dbHedwig/Books?_page=${page}&_limit=2`
+        `https://my-json-server.typicode.com/Akatsuki-Naruto/dbHedwig/Books?_limit=2&_page=${page}`
       )
     ).json();
     setBooks([...Books, ...response.data]);

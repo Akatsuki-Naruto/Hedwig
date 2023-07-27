@@ -69,7 +69,7 @@ function App() {
           )}
         >
           <button className={sidebav}>
-            <a href="/index.html">
+            <a href="/Hedwig">
               <IndexIcon />
             </a>
           </button>

@@ -110,7 +110,7 @@ function Login() {
 
     result = await result.json();
     localStorage.setItem("user-info", JSON.stringify(result));
-    navigate("/")
+    navigate("/Hedwig")
     console.log("3");
   }
 
@@ -164,7 +164,7 @@ function Login() {
               <button
                 className={email && password ? active : disabled}
                 disabled={email && password ? false : true}
-                onClick={signIn}
+                onClick={login}
               >
                 Login
               </button>

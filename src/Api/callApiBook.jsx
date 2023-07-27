@@ -25,7 +25,7 @@ useEffect(() => {
   (async () => {
     const response = await (
       await fetch(
-        `https://my-json-server.typicode.com/Akatsuki-Naruto/dbHedwig/Books?_limit=2&_page=${page}`
+        `http://js-post-api.herokuapp.com/api/posts?_page=${page}&_limit=10`
       )
     ).json();
     setBooks([...Books, ...response.data]);
@@ -195,12 +195,12 @@ useEffect(() => {
       <div>
         <InfiniteScroll
           loader={<p>loading...</p>}
-          className="w-[800px] mx-auto my-10"
+          className="w-[400px] mx-auto my-10"
           fetchMore={() => setPage((prev) => prev + 1)}
           hasMore={Books.length < totalRows}
           endMessage={<p className={clsx("text-black")}>You have seen it all</p>}
         >
-          {Books.map((post, index) => (
+          {/* {Books.map((post, index) => (
             <div
               className="rounded-xl shadow-md bg-black mb-8 flex items-center p-5"
               key={index}
@@ -210,10 +210,9 @@ useEffect(() => {
                 <h3 className="font-medium">{post.name}</h3>
                 <h3 className="font-medium">{post.author}</h3>
                 <h1 className="font-bold text-xl">{post.title}</h1>
-                <p>{post.description}</p>
               </div>
             </div>
-          ))}
+          ))} */}
         </InfiniteScroll>
       </div>
     </div>

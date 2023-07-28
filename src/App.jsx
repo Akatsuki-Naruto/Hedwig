@@ -56,7 +56,7 @@ function App() {
 
   const handleRemove = () => {
     if (localStorage.getItem("user-info")) {
-      navigate("/index.html");
+      navigate("/Hedwig");
     }
   }
 
@@ -166,7 +166,7 @@ function App() {
           </div>
         </div>
         <Routes>
-          <Route path="/Login/*" element={<Login />} />
+          <Route path="/Login/" element={<Login />} />
         </Routes>
         <div className={clsx("Main flex mt-6 w-11/12 mr-0")}>
           <CallApiBook />

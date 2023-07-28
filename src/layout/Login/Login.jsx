@@ -22,95 +22,57 @@ function Login() {
     "cursor-not-allowed hover:bg-gray-300 text-gray-400 bg-gray-300 hover:text-gray-400 px-3 py-1 mr-5"
   );
 
-  // const handleLogin = async () => {
-  //   if (!email || !password) {
-  //     toast.error("Email/ Password is required");
-  //     return;
-  //   }
+  //   function signIn(email, password) {
+  //     var userObj = {email: email, password: password};
+  //     var jsonBody = JSON.stringify(userObj);
 
-  //   let res = await loginApi(email, password);
-  //   if (res && res.token) {
-  //     localStorage.setItem("token", res.token);
-  //     navigate("/index.html");
-  //   }
-  //   console.log(">>> check Login: ", res);
-  // };
-
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("user-info")) {
-  //     navigate("/index.html");
-  //   }
-  //   console.log("1");
-  // }, []);
-
-  function signIn(email, password) {
-    var userObj = {email: email, password: password};
-    var jsonBody = JSON.stringify(userObj);
-    
-    fetch("https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User", {
-        // mode: "no-cors",
-        method: 'POST',
-        headers: {
-            "Accept-language": "RU",
-            "Content-Type": "application/json"
-        },
-        body: jsonBody
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert("Error Password or Username");
-        } else {
-            return data;
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-}
-
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // },[])
-
-  // useEffect (() => {
-  //   setErr('');
-  // },[email,password])
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log(email,password);
-  //   setEmail('');
-  //   setPassword('');
-  //   setSuccess(true);
+  //     fetch("https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User", {
+  //         // mode: "no-cors",
+  //         method: 'POST',
+  //         headers: {
+  //             "Accept-language": "RU",
+  //             "Content-Type": "application/json"
+  //         },
+  //         body: jsonBody
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //         if (data.error) {
+  //             alert("Error Password or Username");
+  //         } else {
+  //             return data;
+  //         }
+  //     })
+  //     .catch((err) => {
+  //         console.log(err);
+  //     });
   // }
 
-  const postUser = async (id) => {
-    const response = await users.post(`/id=${id}`);
-    setUsers(users.filter((user)=> user.id === id))
-  }
+  // const postUser = async (id) => {
+  //   const response = await users.post(`/id=${id}`);
+  //   setUsers(users.filter((user)=> user.id === id))
+  // }
 
-
-  async function login(){
-    let item = {email, password}
-    
+  async function login() {
+    let item = { email, password };
 
     console.log("2!");
-    let result = await fetch("https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        "Accept": 'application/json'
-      },
-      body: JSON.stringify(item)
-    });
+    let result = await fetch(
+      "https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(item),
+      }
+    );
     console.log("2");
-
 
     result = await result.json();
     localStorage.setItem("user-info", JSON.stringify(result));
-    navigate("/Hedwig")
+    navigate("http://localhost:5173/Hedwig");
     console.log("3");
   }
 
@@ -120,12 +82,10 @@ function Login() {
         <Route path="/SignUp/" element={<SignUp />} />
       </Routes>
       <div className={clsx("")}>
-        {/* <p ref={errRef} className={err ? "errmsg":"offscreen"} aria-live="assertive">{err}</p> */}
         <form
           className={clsx(
             "container fixed z-40 top-[50px] left-[60px] bg-gray-500 w-full h-full "
           )}
-          // onSubmit={handleSubmit}
         >
           <div className={clsx("card w-72 m-auto pt-20")}>
             <h2>User Login</h2>
@@ -134,10 +94,6 @@ function Login() {
                 <label className={clsx("mr-2")}>Email</label>
                 <input
                   type="text"
-                  // id="email"
-                  // ref={userRef}
-                  // autoComplete="off"
-                  // required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={clsx("form-control bg-white text-black")}
@@ -152,12 +108,7 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   className={clsx("form-control bg-white text-black")}
                   placeholder="Password ..."
-                  // required
                 />
-                {/* <i
-                  className={isShowPasswords === true ? "" : ""}
-                  onClick={() => setIsShowPasswords(!isShowPasswords)}
-                ></i> */}
               </div>
             </div>
             <div className={clsx("")}>

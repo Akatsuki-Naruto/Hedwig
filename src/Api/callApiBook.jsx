@@ -16,28 +16,23 @@ function CallApiBook() {
   const [Authors, setAuthors] = useState([]);
   const [inforBooks, setInforBooks] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const [totalRows, setTotalRows] = useState(0);
 
+// =================================================================
+// function
 
-const [page, setPage] = useState(1);
-const [totalRows, setTotalRows] = useState(0);
-
-useEffect(() => {
-  (async () => {
-    const response = await (
-      await fetch(
-        `http://js-post-api.herokuapp.com/api/posts?_page=${page}&_limit=10`
-      )
-    ).json();
-    setBooks([...Books, ...response.data]);
-    setTotalRows(response.pagination._totalRows);
-  })();
-}, [page]);
-
-
-
-
-
-
+  useEffect(() => {
+    (async () => {
+      const response = await (
+        await fetch(
+          `http://js-post-api.herokuapp.com/api/posts?_page=${page}&_limit=10`
+        )
+      ).json();
+      setBooks([...Books, ...response.data]);
+      setTotalRows(response.pagination._totalRows);
+    })();
+  }, [page]);
 
   // Functions
   const fetchMyBooks = async () => {
@@ -172,7 +167,22 @@ useEffect(() => {
               price={Book.price}
               image={Book.image}
               getBooks={getBooks}
-              getBook={getBook}
+              // getBook={getBook}
+              loader={
+                <p className={clsx("text-black font-medium w-60 m-auto")}>
+                  loading...
+                </p>
+              }
+              className={clsx(
+                "w-[1000px] mx-auto my-10 grid grid-cols-4 gap-y-10 gap-x-40 justify-center"
+              )}
+              fetchMore={() => setPage((prev) => prev + 1)}
+              hasMore={Books.length < totalRows}
+              endMessage={
+                <p className={clsx("text-black w-60 m-auto")}>
+                  You have seen it all
+                </p>
+              }
             />
           ))}
         </ul>
@@ -194,24 +204,34 @@ useEffect(() => {
       </div>
       <div>
         <InfiniteScroll
-          loader={<p className={clsx("text-black")}>loading...</p>}
-          className="w-[400px] mx-auto my-10"
+          loader={
+            <p className={clsx("text-black font-medium w-60 m-auto")}>
+              loading...
+            </p>
+          }
+          className={clsx(
+            "w-[1000px] mx-auto my-10 grid grid-cols-4 gap-y-10 gap-x-40 justify-center"
+          )}
           fetchMore={() => setPage((prev) => prev + 1)}
           hasMore={Books.length < totalRows}
-          endMessage={<p className={clsx("text-black")}>You have seen it all</p>}
+          endMessage={
+            <p className={clsx("text-black w-60 m-auto")}>
+              You have seen it all
+            </p>
+          }
         >
           {/* {Books.map((post, index) => (
-            <div
-              className="rounded-xl shadow-md bg-black mb-8 flex items-center p-5"
+            <button
+              className={clsx("rounded-xl shadow-md bg-gray-400 w-40 flex items-center p-5 text-base hover:bg-slate-500")}
               key={index}
             >
-              <img src={post.image} className=" rounded-md w-12 h-20" />
-              <div className="ml-5">
-                <h3 className="font-medium">{post.name}</h3>
-                <h3 className="font-medium">{post.author}</h3>
-                <h1 className="font-bold text-xl">{post.title}</h1>
+              <img src={post.image} className={clsx(" rounded-md flex w-12 h-18 border-solid border-[1px] border-black")} />
+              <div className="">
+                <h3 className={clsx("text-sm")}>{post.name}</h3>
+                <h3 className={clsx("text-sm")}>{post.author}</h3>
+                <h1 className={clsx(" font-normal text-base")}>{post.title}</h1>
               </div>
-            </div>
+            </button>
           ))} */}
         </InfiniteScroll>
       </div>

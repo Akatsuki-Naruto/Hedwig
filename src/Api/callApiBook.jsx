@@ -194,7 +194,7 @@ useEffect(() => {
       </div>
       <div>
         <InfiniteScroll
-          loader={<p>loading...</p>}
+          loader={<p className={clsx("text-black")}>loading...</p>}
           className="w-[400px] mx-auto my-10"
           fetchMore={() => setPage((prev) => prev + 1)}
           hasMore={Books.length < totalRows}

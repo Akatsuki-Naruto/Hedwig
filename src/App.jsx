@@ -21,6 +21,7 @@ import {
   ShoppingIcon,
 } from "./assets/svg/svg";
 import Login from "./layout/Login/Login";
+import SignUp from "./layout/Login/SignUp";
 import { Container, Nav, Navbar } from "rsuite";
 import NavDropdown from "rsuite/esm/Nav/NavDropdown";
 import NavDropdownItem from "rsuite/esm/Nav/NavDropdownItem";
@@ -56,9 +57,9 @@ function App() {
 
   const handleRemove = () => {
     if (localStorage.getItem("user-info")) {
-      navigate("/Hedwig");
+      navigate("/Hedwig/*");
     }
-  }
+  };
 
   return (
     <>
@@ -69,7 +70,7 @@ function App() {
           )}
         >
           <button className={sidebav}>
-            <a href="/Hedwig">
+            <a href="/Hedwig/*">
               <IndexIcon />
             </a>
           </button>
@@ -153,12 +154,12 @@ function App() {
               </div>
 
               <Link
-                to={"/Login"}
+                to={"/Hedwig/Login/*"}
                 className={clsx(
                   "flex justify-center w-8 h-8 flex-wrap content-center mr-2 bg-white border-solid border-[1px] border-black rounded-full hover:bg-primary-152 hober:border-[1px] hover:border-solid hover:border-black"
                 )}
                 onClick={handleRemove}
-              ><a href="#"/></Link>
+              ></Link>
               <button className={button}>
                 <ShoppingIcon />
               </button>
@@ -166,7 +167,7 @@ function App() {
           </div>
         </div>
         <Routes>
-          <Route path="/Login/" element={<Login />} />
+          <Route path="/Hedwig/Login/*" element={<Login />} />
         </Routes>
         <div className={clsx("Main flex mt-6 w-11/12 mr-0")}>
           <CallApiBook />

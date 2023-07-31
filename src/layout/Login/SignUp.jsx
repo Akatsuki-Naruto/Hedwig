@@ -1,153 +1,107 @@
+import clsx from "clsx";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
-  const [id, idchange] = useState("");
-  const [name, namechange] = useState("");
-  const [password, passwordchange] = useState("");
-  const [email, emailchange] = useState("");
-  const [phone, phonechange] = useState("");
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+  const [username,setUsername] = useState("")
+  
+  async function login() {
+    let item = { email, password, userName };
 
-  // const navigate = useNavigate();
+    let result = await fetch(
+      'https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User',
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(item),
+      }
+    );
 
-  // const IsValidate = () => {
-  //   let isproceed = true;
-  //   let errormessage = "Please enter the value in ";
-  //   if (id === null || id === "") {
-  //     isproceed = false;
-  //     errormessage += " Username";
-  //   }
-  //   if (name === null || name === "") {
-  //     isproceed = false;
-  //     errormessage += " Fullname";
-  //   }
-  //   if (password === null || password === "") {
-  //     isproceed = false;
-  //     errormessage += " Password";
-  //   }
-  //   if (email === null || email === "") {
-  //     isproceed = false;
-  //     errormessage += " Email";
-  //   }
+    result = await result.json();
+    localStorage.setItem("user-info", JSON.stringify(result));
+    navigate("/Hedwig/*");
+  }
 
-  //   if (!isproceed) {
-  //     toast.warning(errormessage);
-  //   } else {
-  //     if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-  //     } else {
-  //       isproceed = false;
-  //       toast.warning("Please enter the valid email");
-  //     }
-  //   }
-  //   return isproceed;
-  // };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const response = await login({
+      username,
+      password
+    });
+    if ('accessToken' in response) {
+      swal("Success", response.message, "success", {
+        buttons: false,
+        timer: 2000,
+      })
+      .then((value) => {
+        localStorage.setItem('accessToken', response['accessToken']);
+        localStorage.setItem('user', JSON.stringify(response['user']));
+        window.location.href = "/profile";
+      });
+    } else {
+      swal("Failed", response.message, "error");
+    }
+  }
 
-  // const handlesubmit = (e) => {
-  //   e.preventDefault();
-  //   let regobj = { id, name, password, email, phone };
-  //   if (IsValidate()) {
-  //     //console.log(regobj);
-  //     fetch("https://my-json-server.typicode.com/Akatsuki-Naruto/dbUser/User", {
-  //       method: "POST",
-  //       headers: { "content-type": "application/json" },
-  //       body: JSON.stringify(regobj),
-  //     })
-  //       .then((res) => {
-  //         toast.success("Registered successfully.");
-  //         navigate("/login");
-  //       })
-  //       .catch((err) => {
-  //         toast.error("Failed :" + err.message);
-  //       });
-  //   }
-  // };
   return (
-    <div>
-      <div className="offset-lg-3 col-lg-6">
-        <form className="container" onSubmit={handlesubmit}>
-          <div className="card">
-            <div className="card-header">
-              <h1>User Registeration</h1>
-            </div>
-            <div className="card-body">
-              <div className="row">
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label>
-                      User Name <span className="errmsg">*</span>
-                    </label>
-                    <input
-                      value={id}
-                      onChange={(e) => idchange(e.target.value)}
-                      className="form-control"
-                    ></input>
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label>
-                      Password <span className="errmsg">*</span>
-                    </label>
-                    <input
-                      value={password}
-                      onChange={(e) => passwordchange(e.target.value)}
-                      type="password"
-                      className="form-control"
-                    ></input>
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label>
-                      Full Name <span className="errmsg">*</span>
-                    </label>
-                    <input
-                      value={name}
-                      onChange={(e) => namechange(e.target.value)}
-                      className="form-control"
-                    ></input>
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label>
-                      Email <span className="errmsg">*</span>
-                    </label>
-                    <input
-                      value={email}
-                      onChange={(e) => emailchange(e.target.value)}
-                      className="form-control"
-                    ></input>
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label>
-                      Phone <span className="errmsg"></span>
-                    </label>
-                    <input
-                      value={phone}
-                      onChange={(e) => phonechange(e.target.value)}
-                      className="form-control"
-                    ></input>
-                  </div>
-                </div>
+    <>
+      <div className={clsx("")}>
+        <form
+          className={clsx(
+            "container fixed z-40 top-[50px] left-[60px] bg-gray-500 w-full h-full "
+          )}
+        >
+          <div className={clsx("card w-72 m-auto pt-20")}>
+            <h2>User Sign In</h2>
+            <div className={clsx("card-body flex flex-col items-end")}>
+            <div className={clsx("form-group text-black mb-2")}>
+                <label className={clsx("mr-2")}>User Name</label>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className={clsx("form-control bg-white text-black")}
+                  placeholder="UserName"
+                ></input>
+              </div>
+              <div className={clsx("form-group text-black mb-2")}>
+                <label className={clsx("mr-2")}>Email</label>
+                <input
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={clsx("form-control bg-white text-black")}
+                  placeholder="Email"
+                ></input>
+              </div>
+              <div className={clsx("form-group text-black mb-2")}>
+                <label className={clsx("mr-2")}>Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={clsx("form-control bg-white text-black")}
+                  placeholder="Password ..."
+                />
               </div>
             </div>
-            <div className="card-footer">
-              <button type="submit" className="btn btn-primary">
-                Register
-              </button>{" "}
-              |
-              <Link to={"/login"} className="btn btn-danger">
-                Close
-              </Link>
+            <div className={clsx("")}>
+              <button
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

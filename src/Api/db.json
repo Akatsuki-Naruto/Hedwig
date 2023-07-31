@@ -1,0 +1,49 @@
+{
+  "User": [
+    {
+      "id": 1,
+      "name": "Nguyen Van A",
+      "username": "nguyena",
+      "password": "123456",
+      "avatar":"",
+      "gmail":"",
+      "phone":""
+    },
+    {
+      "id": 2,
+      "name": "Nguyen Thi B",
+      "username": "nguyenb",
+      "password": "12345678",
+      "avatar":"",
+      "gmail":"",
+      "phone":""
+    },
+    {
+      "id": 3,
+      "name": "Duong Van C",
+      "username": "duongc",
+      "password": "88888888",
+      "avatar":"",
+      "gmail":"",
+      "phone":""
+    },
+    {
+      "id": 4,
+      "name": "Nguyen D",
+      "username": "nguyend",
+      "password": "Thuc190401@",
+      "avatar":"",
+      "gmail":"",
+      "phone":""
+    },
+    {
+      "id": 5,
+      "name": "Hoang Thi E",
+      "username": "hoange",
+      "password": "thuc190401",
+      "avatar":"",
+      "gmail":"",
+      "phone":""
+    }
+  ]
+}
